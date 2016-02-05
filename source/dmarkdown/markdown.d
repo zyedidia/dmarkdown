@@ -137,10 +137,10 @@ unittest
 	    "\n"
 	    "    code block\n";
 	auto expected =
-	    "<p><code class=\"prettyprint\">AAAAAAAAAAA</code>\n"
+	    "<p><code>AAAAAAAAAAA</code>\n"
 	    "block:\n"
 	    "</p>\n"
-	    "<pre class=\"prettyprint\"><code>"
+	    "<pre><code>"
 	    "AAAAAAAAAA"
 	    "</code></pre>";
 
@@ -529,7 +529,7 @@ private void writeBlock(R)(ref R dst, ref const Block block, LinkRef[string] lin
 			break;
 		case BlockType.Code:
 			assert(block.blocks.length == 0);
-			dst.put("<pre class=\"prettyprint\"><code>");
+			dst.put("<pre><code>");
 			if(settings.processCode is null)
 			{
 				foreach(ln; block.text){
@@ -616,7 +616,7 @@ private void writeMarkdownEscaped(R)(ref R dst, string ln, in LinkRef[string] li
 			case '`':
 				string code;
 				if( parseInlineCode(ln, code) ){
-					dst.put("<code class=\"prettyprint\">");
+					dst.put("<code>");
 					if(settings.processCode is null)
 					{
 						filterHTMLEscape(dst, code, HTMLEscapeFlags.escapeMinimal);
